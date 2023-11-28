@@ -6,7 +6,7 @@ import fastify from "fastify";
 import triggerUpdateMiddleware from "./middleware.js";
 
 const envSchema = Type.Object({
-    GH_UPDATE_SECRET: Type.Optional(Type.String()),
+    TRIGGER_UPDATE_SECRET: Type.Optional(Type.String()),
     WEB_PORT: Type.RegExp(/[0-9]+/g),
 });
 
@@ -20,9 +20,12 @@ async function main() {
         requestIdHeader: "TrackingId",
     });
 
-    await server.register(triggerUpdateMiddleware, {
-        secret: env.GH_UPDATE_SECRET,
-    });
+    if (env.TRIGGER_UPDATE_SECRET) {
+        // only register update middleware when the secret is configured
+        await server.register(triggerUpdateMiddleware, {
+            secret: env.TRIGGER_UPDATE_SECRET,
+        });
+    }
 
     server.get("/", async (_, res) => {
         await res
