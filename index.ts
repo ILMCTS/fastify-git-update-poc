@@ -12,7 +12,6 @@ const envSchema = Type.Object({
 
 async function main() {
     config();
-
     const env = Value.Decode(envSchema, process.env);
 
     const server = fastify({
@@ -25,10 +24,14 @@ async function main() {
         secret: env.GH_UPDATE_SECRET,
     });
 
-    server.get("/", async () => "<h1>Hello World</h1>")
+    server.get("/", async (_, res) => {
+        await res
+            .header("Content-Type", "text/html")
+            .send("<center><h1>Hello World</h1></center>");
+    })
 
-    const addr = await server.listen({ port: Number(env.WEB_PORT) });
-    console.info(`Listening on ${addr}`)
+    const address = await server.listen({ port: Number(env.WEB_PORT) });
+    console.info(`Listening on ${address}`);
 }
 
 main();
