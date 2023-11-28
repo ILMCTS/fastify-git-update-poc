@@ -25,6 +25,8 @@ async function main() {
         secret: env.GH_UPDATE_SECRET,
     });
 
+    server.get("/", async () => "<h1>Hello World</h1>")
+
     const addr = await server.listen({ port: Number(env.WEB_PORT) });
     console.info(`Listening on ${addr}`)
 }
