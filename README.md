@@ -14,3 +14,9 @@ Simple PoC of a middleware to automaticly trigger a update:
 GH_UPDATE_SECRET="some_random_secret_like_uuid"
 WEB_PORT="3000"
 ```
+
+## Trigger Update
+
+POST `http://localhost:3000/trigger-update`
+
+Along with the `Authorization` Header which contains our `GH_UPDATE_SECRET` environment variable value.

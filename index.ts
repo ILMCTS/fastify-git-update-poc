@@ -28,7 +28,7 @@ async function main() {
         await res
             .header("Content-Type", "text/html")
             .send("<center><h1>Hello World</h1></center>");
-    })
+    });
 
     const address = await server.listen({ port: Number(env.WEB_PORT) });
     console.info(`Listening on ${address}`);
