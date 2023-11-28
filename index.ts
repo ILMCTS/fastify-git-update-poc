@@ -21,7 +21,9 @@ async function main() {
         requestIdHeader: "TrackingId",
     });
 
-    await server.register(triggerUpdateMiddleware);
+    await server.register(triggerUpdateMiddleware, {
+        secret: env.GH_UPDATE_SECRET,
+    });
 
     const addr = await server.listen({ port: Number(env.WEB_PORT) });
     console.info(`Listening on ${addr}`)
