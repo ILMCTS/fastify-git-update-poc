@@ -3,6 +3,7 @@ import { FastifyInstance } from "fastify";
 
 const triggerUpdateMiddleware = async (inst: FastifyInstance, opt: { secret: string }) => {
     inst.get<{ Querystring: { secret?: string } }>("/trigger-update", async (req, res) => {
+        // TODO: request header
         if (req.query.secret !== opt.secret) {
             return res.status(403).send({ message: "invalid secret" });
         }
