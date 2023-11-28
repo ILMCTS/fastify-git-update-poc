@@ -8,6 +8,8 @@ Simple PoC of a middleware to automaticly trigger a update:
 4. Build repo
 5. Start repo
 
+> The idea behind this simple poc is, that gh actions is calling this endpoint rather than connecting the the server via ssh and updating the repo that way. (Security)
+
 ## Environment Config
 
 ```env
